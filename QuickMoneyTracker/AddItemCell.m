@@ -220,7 +220,13 @@
         {
             [self setKingCostValue:[self calculateValue:textField]];
             if (_howMuchValueHasChanged)
-                [self setQueneCostValue:(_howMuchValue - _kingCostValue)];
+            {
+                if (_kingCostValue <= _howMuchValue)
+                    [self setQueneCostValue:(_howMuchValue - _kingCostValue)];
+                else
+                    [self setHowMuchValue:(_kingCostValue + _queneCostValue)];
+                
+            }
             else
                 [self setHowMuchValue:(_kingCostValue + _queneCostValue)];
         }
@@ -230,7 +236,12 @@
             [self setQueneCostValue:[self calculateValue:textField]];
 
             if (_howMuchValueHasChanged)
-                [self setKingCostValue:(_howMuchValue - _queneCostValue)];
+            {
+                if (_queneCostValue <= _howMuchValue)
+                    [self setKingCostValue:(_howMuchValue - _queneCostValue)];
+                else
+                    [self setHowMuchValue:(_kingCostValue + _queneCostValue)];
+            }
             else
                 [self setHowMuchValue:(_kingCostValue + _queneCostValue)];
         }
