@@ -25,4 +25,10 @@
  */
 - (BOOL)isNearToDate:(NSDate *)date;
 
+
+/**
+ *  计算时间相近程度
+ *
+ */
+- (double)nearRateOf:(NSDate *)date;
 @end

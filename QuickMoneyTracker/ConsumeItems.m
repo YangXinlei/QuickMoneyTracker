@@ -118,39 +118,41 @@
     
     for (ConsumeEventItem *item in _consumeItemArray)
     {
-        if ([curTime isNearToDate:item.when])
+        NSNumber *curRate;
+        NSNumber *suggestRate;  //推荐程度 = sum (每次时间相近程度)
+        
+        double nearRate = [curTime nearRateOf:item.when]; //时间相近程度
+        
+        if ( nil != (curRate = [countMap objectForKey:item]) )
         {
-            NSNumber *countNum;
-            NSNumber *number;
-            if ( nil != (countNum = [countMap objectForKey:item]) )
-            {
-                number = [NSNumber numberWithInt:[countNum intValue] + 1];
-            }
-            else
-            {
-                number = [NSNumber numberWithInt:1];
-            }
-            [countMap setObject:number forKey:item];
+            suggestRate = [NSNumber numberWithDouble:[curRate doubleValue] + nearRate];
         }
+        else
+        {
+            suggestRate = [NSNumber numberWithDouble:nearRate];
+        }
+        [countMap setObject:suggestRate forKey:item];
     }
     
     __block ConsumeEventItem *maxKey = nil;
-    __block int maxCount = 0;
+    __block double maxRate = 0;
     
     [countMap enumerateKeysAndObjectsUsingBlock:^(ConsumeEventItem *key, NSNumber *value, BOOL *stop){
-        if ( [value intValue] >= maxCount)
+        if ( [value doubleValue] >= maxRate)
         {
-            maxCount = [value intValue];
+            maxRate = [value doubleValue];
             maxKey = key;
         }
     }];
+    
+    NSLog(@"%@", countMap);
     
     return maxKey ? maxKey : [[ConsumeEventItem alloc] initWithDate:[NSDate date] what:@"其他" howMuch:0 kingCost:0 queueCost:0];
 }
 
 -(ColorType)suggestColor:(ConsumeEventItem *)item
 {
-    static const double maxCost = 10000;
+    static const double maxCost = 1000;
     float rate = (item.howMuch / maxCost);
     if (rate < 0.2) rate = 0.2;
     if (rate > 1.0) rate = 1.0;

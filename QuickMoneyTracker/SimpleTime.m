@@ -49,4 +49,13 @@
     return NO;
 }
 
+-(double)nearRateOf:(NSDate *)date
+{
+    SimpleTime *givenTime = [[SimpleTime alloc] initWithDate:date];
+    
+    long diffInMinute = (givenTime.hour - _hour) * 60 + (givenTime.minute - _minute);
+    
+    return 1.0 - diffInMinute / (24 * 60);
+}
+
 @end

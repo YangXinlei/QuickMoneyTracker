@@ -169,21 +169,21 @@
     spaceXStart += kHowMuchColumnWidth + kGapWidth;
     
     UILabel *kingCostLabel = [[UILabel alloc] initWithFrame:CGRectMake(spaceXStart, 0, kKingCostColumnWidth, kCellHeight)];
-    [kingCostLabel setText:@"主"];
+    [kingCostLabel setText:@"A"];
     [kingCostLabel setBackgroundColor:[UIColor clearColor]];
     [kingCostLabel setTextAlignment:NSTextAlignmentCenter];
     [headerView addSubview:kingCostLabel];
     spaceXStart += kKingCostColumnWidth + kGapWidth;
     
     UILabel *queneCostlabel = [[UILabel alloc] initWithFrame:CGRectMake(spaceXStart, 0, kQueneCostColumnWidth, kCellHeight)];
-    [queneCostlabel setText:@"次"];
+    [queneCostlabel setText:@"B"];
     [queneCostlabel setBackgroundColor:[UIColor clearColor]];
     [queneCostlabel setTextAlignment:NSTextAlignmentCenter];
     [headerView addSubview:queneCostlabel];
     spaceXStart += kQueneCostColumnWidth + kGapWidth;
     
     UILabel *whatLabel = [[UILabel alloc] initWithFrame:CGRectMake(spaceXStart, 0, kWhatColumnWidth, kCellHeight)];
-    [whatLabel setText:@"备注"];
+    [whatLabel setText:@"用途"];
     [whatLabel setBackgroundColor:[UIColor clearColor]];
     [whatLabel setTextAlignment:NSTextAlignmentCenter];
     [headerView addSubview:whatLabel];
